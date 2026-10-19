@@ -31,14 +31,17 @@ python -c "import nltk; nltk.download('punkt')"
 
 Note: we use `openai==0.28.1`, which use `openai.ChatCompletion.create` to call api.
 
-2. Edit openai config at **core/api_config.py**, and set related environment variables of Azure OpenAI API.
-
-Currently, we use `gpt-4-1106-preview` (128k version) by default, which is 2.5 times less expensive than the `gpt-4 (8k)` on average.
+2. Configure the OpenAI-compatible endpoint using these environment variables
+in the terminal where you run MAC-SQL:
 
 ```bash
-export OPENAI_API_BASE="YOUR_OPENAI_API_BASE"
-export OPENAI_API_KEY="YOUR_OPENAI_API_KEY"
+export LLM_BASE_URL="http://localhost:20128/v1"
+export LLM_API_KEY="YOUR_API_KEY"
+export LLM_MODEL="cx/gpt-6-luna"
 ```
+
+The URL and model above are the defaults. `LLM_API_KEY` is required and is never
+stored in source code. Only the OpenAI-compatible Chat Completions API is used.
 
 ## 🔧 Data Preparation
 
@@ -76,17 +79,6 @@ EX: Execution Accuracy(%)
 VES: Valid Efficiency Score(%)
 
 Refer to our paper for the details.
-
-
-## 🫡Run SQL-Llama
-
-Download the [SQL-Llama](https://huggingface.co/IceKingBing)(current v0.5 version) and follow the [SQL-Llama-deployment.md](SQL-Llama-deployment.md) to deploy.
-
-Uncomment the `MODEL_NAME = 'CodeLlama-7b-hf'` in `core/api_config.py` to set the global model and comment other `MODEL_NAME = xxx` lines.
-
-Uncomment the `export OPENAI_API_BASE='http://0.0.0.0:8000/v1'` in `run.sh` to set the local model api base.
-
-Then, run `run.sh` to start your local inference.
 
 
 ## 🌟 Project Structure

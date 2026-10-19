@@ -3,6 +3,7 @@ from core.utils import *
 from core.chat_manager import ChatManager
 from core.utils import get_gold_columns
 from core.const import SYSTEM_NAME
+from core.api_config import MODEL_NAME
 from tqdm import tqdm
 import time
 import argparse
@@ -77,7 +78,7 @@ def run_batch(dataset_name, input_file, output_file, db_path, tables_json_path, 
                                tables_json_path=tables_json_path,
                                log_path=log_file,
                                dataset_name=dataset_name,
-                               model_name='gpt-4',
+                               model_name=MODEL_NAME,
                                lazy=True,
                                without_selector=without_selector)
     # load dataset

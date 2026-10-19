@@ -1,9 +1,7 @@
 #!/bin/bash
 
-# default using gpt-4-1106-preview (128k) in core.llm.py api_func
-
-# using SQL-Llama endpoint
-# export OPENAI_API_BASE='http://0.0.0.0:8000/v1'
+# Set LLM_API_KEY before running. Optional LLM_BASE_URL and LLM_MODEL overrides
+# default to http://localhost:20128/v1 and cx/gpt-6-luna.
 
 # Generate SQL on foo dataset for env test
 # This will get ./outputs/foo/output_bird.json and ./outputs/foo/predict_test.json

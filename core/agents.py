@@ -2,16 +2,7 @@
 from core.utils import parse_json, parse_sql_from_string, add_prefix, load_json_file, extract_world_info, is_email, is_valid_date_column
 from func_timeout import func_set_timeout, FunctionTimedOut
 
-LLM_API_FUC = None
-# try import core.api, if error then import core.llm
-try:
-    from core import api
-    LLM_API_FUC = api.safe_call_llm
-    print(f"Use func from core.api in agents.py")
-except:
-    from core import llm
-    LLM_API_FUC = llm.safe_call_llm
-    print(f"Use func from core.llm in agents.py")
+from core.llm import safe_call_llm as LLM_API_FUC
 
 from core.const import *
 from typing import List

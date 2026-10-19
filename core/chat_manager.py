@@ -2,18 +2,8 @@
 from core.agents import Selector, Decomposer, Refiner
 from core.const import MAX_ROUND, SYSTEM_NAME, SELECTOR_NAME, DECOMPOSER_NAME, REFINER_NAME
 
-INIT_LOG__PATH_FUNC = None
-LLM_API_FUC = None
-try:
-    from core import api
-    LLM_API_FUC = api.safe_call_llm
-    INIT_LOG__PATH_FUNC = api.init_log_path
-    print(f"Use func from core.api in chat_manager.py")
-except:
-    from core import llm
-    LLM_API_FUC = llm.safe_call_llm
-    INIT_LOG__PATH_FUNC = llm.init_log_path
-    print(f"Use func from core.llm in chat_manager.py")
+from core.api_config import MODEL_NAME
+from core.llm import safe_call_llm as LLM_API_FUC, init_log_path as INIT_LOG__PATH_FUNC
 
 import time
 from pprint import pprint
@@ -66,7 +56,7 @@ class ChatManager(object):
 if __name__ == "__main__":
     test_manager = ChatManager(data_path="../data/spider/database",
                                log_path="",
-                               model_name='gpt-4-32k',
+                               model_name=MODEL_NAME,
                                dataset_name='spider',
                                lazy=True)
     msg = {
