@@ -352,8 +352,13 @@ def parse_sql_from_string(input_string):
     
     if all_sqls:
         return all_sqls[-1]
-    else:
-        return "error: No SQL found in the input string"
+    # Some models return the requested SQL directly, without Markdown fences.
+    # Only accept a response that starts with a query; do not extract SQL from
+    # arbitrary explanatory prose or a malformed fenced block.
+    candidate = input_string.strip()
+    if "```" not in candidate and re.match(r"\A(?:SELECT|WITH)\b", candidate, re.IGNORECASE):
+        return candidate
+    return "error: No SQL found in the input string"
 
 
 def parse_single_sql(res: str) -> str:  # if do not need decompose, just one code block is OK!
